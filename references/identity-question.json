@@ -1,0 +1,17 @@
+{
+  "question": "你现在是什么状态？",
+  "options": [
+    {
+      "label": "学生",
+      "description": "目前以学习为主。"
+    },
+    {
+      "label": "已经工作",
+      "description": "目前以工作为主。"
+    },
+    {
+      "label": "混合身份",
+      "description": "同时有多种身份，或不完全符合前两项。"
+    }
+  ]
+}
