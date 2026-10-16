@@ -1,0 +1,4 @@
+interface:
+  display_name: "漫游作品集"
+  short_description: "通过选择题和素材收集，生成森林、沙漠、海洋三主题的可探索个人作品集。"
+  default_prompt: "使用 $island-portfolio，先通过选择题帮我确定模块和名字，再把我的经历做成三维作品集。"

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="theme-color" content="#d5eef0" />
+    <meta
+      name="description"
+      content="欢迎来到漫游作品集。在森屿、沙洲和浅海自由漫游，发现创作、黑客松、论文与产品实践。"
+    />
+    <title>漫游作品集 · 个人作品集</title>
+  </head>
+  <body data-theme="forest">
+    <main id="app">
+      <div id="world" aria-label="漫游作品集三维场景"></div>
+      <div class="edge-light" aria-hidden="true"></div>
+      <div id="loading" role="status">
+        <div class="loading-island">✳</div>
+        <p>正在抵达你的好奇心小岛…</p>
+        <span>A LITTLE WORLD, A LOT TO DISCOVER.</span>
+      </div>
+      <header class="topbar">
+        <button id="home" class="brand" aria-label="显示欢迎介绍">
+          <span class="brand-mark">t<span>·</span></span
+          ><span class="brand-copy"
+            >漫游作品集<small>A UNIVERSE OF CURIOSITY</small></span
+          >
+        </button>
+        <div class="top-controls">
+          <div class="theme-picker" role="group" aria-label="小岛主题">
+            <button data-theme="forest" aria-pressed="true">
+              <span>♧</span> 森屿</button
+            ><button data-theme="desert" aria-pressed="false">
+              <span>☼</span> 沙洲</button
+            ><button data-theme="ocean" aria-pressed="false">
+              <span>≈</span> 浅海
+            </button>
+          </div>
+          <button
+            id="sound"
+            class="round-button"
+            aria-label="开启环境音"
+            aria-pressed="false"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M10 5 5 9H2v6h3l5 4V5Z" />
+              <path id="sound-waves" d="m16 9 5 6m0-6-5 6" />
+            </svg></button
+          ><button id="help" class="round-button" aria-label="查看玩法">
+            ?
+          </button>
+        </div>
+      </header>
+      <section id="welcome" class="welcome">
+        <p class="eyebrow"><span></span> A WORLD OF YOUR OWN</p>
+        <h1>
+          欢迎来到<br /><span>漫游作品集<span class="title-dot">。</span></span>
+        </h1>
+        <p class="welcome-story">
+          用你自己的经历，开启这段旅程。
+        </p>
+        <div class="welcome-instructions">
+          <p>
+            <span class="instruction-symbol">↔</span><b>拖动环顾</b
+            ><span>360° 看看这座小岛</span>
+          </p>
+          <p>
+            <span class="instruction-symbol">⌖</span><b>点击行走</b
+            ><span>走近微光，发现我的故事</span>
+          </p>
+        </div>
+        <button id="explore" class="primary-button">
+          出发，去逛逛 <span>↗</span></button
+        ><button id="channel" class="channel-link">
+          与我联系 <span>↗</span>
+        </button>
+        <p class="welcome-note">也可以使用 WASD / 方向键自由行走</p>
+      </section>
+      <div id="camp-labels" aria-label="岛上的营地"></div>
+      <aside id="work" class="work-panel" aria-label="作品分类详情" hidden>
+        <button id="close-work" class="close-button" aria-label="关闭详情">
+          ×
+        </button>
+        <div class="panel-scene">
+          <span id="panel-number"></span
+          ><svg
+            id="panel-art"
+            viewBox="0 0 240 120"
+            fill="none"
+            aria-hidden="true"
+          >
+            <ellipse
+              cx="125"
+              cy="102"
+              rx="79"
+              ry="9"
+              fill="currentColor"
+              opacity=".08"
+            />
+            <path
+              d="M45 100 116 24l75 76H45Z"
+              stroke="currentColor"
+              stroke-width="1.4"
+            />
+            <path
+              d="m116 24-3 76m0-48-30 48m30-48 28 48M45 100l-15 8m161-8 15 8"
+              stroke="currentColor"
+              stroke-width="1.4"
+            />
+            <circle cx="189" cy="31" r="12" stroke="currentColor" />
+            <path
+              d="M201 31h9m-21-21V3m-20 28h-8m28 21v9"
+              stroke="currentColor"
+            />
+            <path
+              d="m39 63 4-6 4 6m-4-6v17m151 8 3-5 3 5m-3-5v12"
+              stroke="currentColor"
+            />
+          </svg>
+          <p id="panel-english"></p>
+        </div>
+        <div class="panel-body">
+          <p class="eyebrow" id="panel-category"></p>
+          <h2 id="work-title"></h2>
+          <p id="work-intro" class="work-intro"></p>
+          <p id="work-description"></p>
+          <div id="work-sections"></div>
+          <button id="continue" class="continue-button">
+            继续逛小岛 <span>→</span>
+          </button>
+        </div>
+      </aside>
+      <dialog id="evidence-dialog" aria-label="查看完整图片">
+        <button id="close-evidence" aria-label="关闭图片">×</button
+        ><img alt="" />
+        <p></p>
+      </dialog>
+      <aside class="island-tools">
+        <button id="overview" class="overview-button">
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <circle cx="12" cy="12" r="8" />
+            <path d="M4 12h16M12 4c5 4 5 12 0 16-5-4-5-12 0-16Z" />
+          </svg>
+          全岛视角 <span>↗</span>
+        </button>
+        <div class="minimap" aria-label="全岛位置图">
+          <span class="map-north">N</span>
+          <div class="map-island">
+            <span class="map-lake"></span>
+            <div id="map-sites"></div>
+            <span id="map-player" aria-label="你的位置"></span>
+          </div>
+          <span class="map-caption"><i></i> 你在这里</span>
+        </div>
+        <div class="compass" aria-hidden="true">
+          <span id="compass-needle">↑</span><span>N</span>
+        </div>
+      </aside>
+      <footer class="bottom-bar">
+        <div class="world-caption">
+          <span id="theme-english">FOREST ISLAND</span>
+          <p id="theme-caption">把好奇心，走成一座岛。</p>
+        </div>
+        <nav
+          id="category-nav"
+          class="category-nav"
+          aria-label="前往作品分类"
+        ></nav>
+        <div class="discovery">
+          <span id="visited-count">00</span
+          ><span>/ <b id="camp-total">04</b><small>营地探索</small></span>
+        </div>
+      </footer>
+      <div id="walk-status" class="walk-status" role="status">
+        点击地面，自由探索
+      </div>
+      <div class="touch-pad" aria-label="移动方向控制">
+        <button data-dir="0,-1" aria-label="向前走">↑</button
+        ><button data-dir="-1,0" aria-label="向左走">←</button><span>✦</span
+        ><button data-dir="1,0" aria-label="向右走">→</button
+        ><button data-dir="0,1" aria-label="向后走">↓</button>
+      </div>
+      <div id="toast" role="status" hidden></div>
+      <dialog id="help-dialog">
+        <button id="close-help" class="close-button" aria-label="关闭玩法">
+          ×
+        </button>
+        <p class="eyebrow">A FIELD GUIDE</p>
+        <h2>小岛漫游指南</h2>
+        <p class="help-intro">
+          不必按顺序，也没有规定路线。<br />找到微光，就能找到一个故事。
+        </p>
+        <dl>
+          <div>
+            <dt>环顾小岛</dt>
+            <dd>鼠标按住拖动 / 单指拖动，360° 旋转；视角俯仰有边界。</dd>
+          </div>
+          <div>
+            <dt>靠近风景</dt>
+            <dd>滚轮 / 双指捏合缩放，始终停留在舒适的观看范围。</dd>
+          </div>
+          <div>
+            <dt>自由行走</dt>
+            <dd>点击地面，或使用 WASD / 方向键。手机可按住左下方向按钮。</dd>
+          </div>
+          <div>
+            <dt>发现故事</dt>
+            <dd>
+              走进发光圆点会打开营地。点击分类或地图标记，也会带你走过去。
+            </dd>
+          </div>
+          <div>
+            <dt>切换世界</dt>
+            <dd>森屿、沙洲、浅海拥有不同风景，营地故事和你的位置保持不变。</dd>
+          </div>
+        </dl>
+        <p class="help-foot">
+          湖泊和岸边会挡住脚步，不会掉出小岛。<br />按 Esc 可关闭详情或指南。
+        </p>
+        <button id="help-done" class="primary-button">知道了，出发 ↗</button>
+      </dialog>
+      <div id="fallback" hidden>
+        <h2>这座小岛需要 WebGL 支持</h2>
+        <p>仍可通过下方分类阅读内容。换用支持 WebGL 的浏览器即可自由漫游。</p>
+      </div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

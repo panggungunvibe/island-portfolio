@@ -1,0 +1,32 @@
+name: Verify skill and template
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: assets/template/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test installer and scaffolder
+        run: python3 -m unittest discover -s tests -v
+      - name: Build four-module template
+        working-directory: assets/template
+        run: |
+          npm ci
+          npm test
+          npm run build
+      - name: Generate and build three-module website
+        run: |
+          python3 scripts/scaffold.py --brief examples/three-modules.json --output /tmp/island-three
+          cd /tmp/island-three
+          npm ci
+          npm test
+          npm run build
