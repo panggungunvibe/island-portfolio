@@ -19,7 +19,7 @@ export function normalizePortfolio(data) {
   if(!/^[a-z][a-z0-9-]*$/.test(m.id)||ids.has(m.id)) throw new Error('Module ids must be unique lowercase slugs');
   ids.add(m.id);
   if (!m.name || !m.short || !kinds.has(m.kind)) throw new Error('Module name, short label and supported kind are required');
-  if (!Array.isArray(m.items)||!m.items.length) throw new Error('Each module needs at least one real item');
+  if (!Array.isArray(m.items) || (!m.items.length && m.emptyConfirmed !== true)) throw new Error('Provide real items or explicitly confirm an empty section');
   for (const item of m.items) {
    if (!item.title || !item.summary) throw new Error('Each item needs a title and summary');
    if (item.image && !/^\/assets\/[a-zA-Z0-9_.-]+$/.test(item.image)) throw new Error('Images must be staged under /assets/');

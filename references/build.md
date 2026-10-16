@@ -12,7 +12,7 @@
 
 ## JSON 约定
 
-参照 [四模块示例](../examples/four-modules.json) 和 [三模块示例](../examples/three-modules.json)。
+新网站使用固定四部分，参照 [四模块示例](../examples/four-modules.json) 的字段结构。三部分数据只保留用于已有网站兼容，不在新用户流程中推荐。示例、原作者网站与 README 截图中的个人内容均不得复制到用户数据。
 
 ```json
 {
@@ -24,7 +24,7 @@
     "intro": "依据真实材料撰写的介绍",
     "links": [{"label": "GitHub", "url": "https://github.com/用户名"}]
   },
-  "modules": ["这里必须替换为三个或四个模块对象，不能保留此说明"]
+  "modules": ["这里必须替换为四个模块对象，不能保留此说明"]
 }
 ```
 
@@ -33,7 +33,7 @@
 - `name`：分类名称，建议 4–8 个汉字。
 - `short`：场景标签，建议不超过 6 个汉字。
 - `kind`：`gallery` / `awards` / `research` / `projects`。
-- `items`：至少一个真实条目。
+- `items`：真实条目数组。用户明确表示没有该类内容时可为 `[]`，同时必须设置 `emptyConfirmed: true`；未收集或未回答不能用空数组冒充已完成。空部分只显示“暂无展示内容”，不填虚构条目。
 
 模块可选：`intro` 一句话、`description`、`english`、`metrics`、`links`、`timeline`。
 
@@ -67,7 +67,7 @@ npm run dev -- --port 5173
 
 目录有空格时给路径加引号。若已有服务占用 5173，选一个未使用的端口并交付实际地址，不能停掉用户的其他服务。静态产物在 `dist/`。
 
-示例为演示用。如果材料已收齐，生成器输入必须是当前用户的 JSON，而不是原样拿 examples 交付。
+示例只供字段格式参考。材料收齐后，从当前用户的已确认资料新建 JSON，不从演示数据逐项改名。profile、每个 item、图片与链接都必须能对应到访谈材料；无个人称呼时 profile.name 使用已确认的网站名。简介可基于材料总结，不加入作者经历或未确认成果。
 
 ## 编辑与保留
 

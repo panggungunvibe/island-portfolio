@@ -15,3 +15,15 @@ test('Untrusted captions stay text and executable links are not emitted',()=>{
  assert.equal(safeUrl('javascript:alert(1)'), '');assert.equal(safeUrl('data:text/html,abc'),'');
  assert.equal(safeUrl('https://example.org/work'), 'https://example.org/work');
 });
+
+test('Empty sections require explicit confirmation and retain all four scene slots',()=>{
+ const d=structuredClone(data);
+ if(d.modules.length===3) d.modules.push({...structuredClone(d.modules[0]),id:'fourth-section'});
+ for (const m of d.modules) m.items=[];
+ assert.throws(()=>normalizePortfolio(d));
+ for (const m of d.modules) m.emptyConfirmed=true;
+ const {categories}=normalizePortfolio(d);
+ assert.equal(categories.length,4);
+ assert.deepEqual(categories.map(m=>m.number),['01','02','03','04']);
+ assert.ok(categories.every(m=>m.items.length===0));
+});

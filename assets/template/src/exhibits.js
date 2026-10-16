@@ -13,6 +13,10 @@ export function mountExhibit(host,id) {
  const module=categories.find(c=>c.id===id);
  if(!module) return;
  current={host,id};
+ if (!module.items.length) {
+  host.innerHTML='<article class="award-card story-enter"><h3>暂无展示内容</h3></article>';
+  return;
+ }
  if(!states.has(id)) states.set(id,{item:0,chapter:0});
  const s=states.get(id), item=module.items[s.item], chapters=item.chapters||[];
  let view='';
