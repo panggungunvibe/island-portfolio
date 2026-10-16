@@ -45,6 +45,8 @@ class Scripts(unittest.TestCase):
    self.assertTrue((out/'SKILL.md').exists())
    self.assertTrue((out/'assets/template/src/island.js').exists())
    self.assertTrue(receipt['starAsked']);self.assertFalse(receipt['starPerformed'])
+   self.assertEqual(receipt['starConsentVersion'],2)
+   self.assertEqual(receipt['starStatus'],'pending' if answer=='yes' else 'declined')
    self.assertFalse((out/'.git').exists());self.assertFalse((out/'assets/template/node_modules').exists())
  def test_install_never_overwrites_existing_skill(self):
   out=install(self.dir/'skills','no');(out/'personal-note').write_text('keep')
